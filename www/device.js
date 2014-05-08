@@ -41,7 +41,7 @@ function Device() {
     this.uuid = null;
     this.cordova = null;
     this.model = null;
-    this.imei＝ null;
+    this.imei = null;
 
     var me = this;
 
