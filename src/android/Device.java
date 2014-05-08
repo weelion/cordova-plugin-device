@@ -73,6 +73,7 @@ public class Device extends CordovaPlugin {
             r.put("version", this.getOSVersion());
             r.put("platform", this.getPlatform());
             r.put("model", this.getModel());
+            r.put("imei", this.getImei());
             callbackContext.success(r);
         }
         else {
@@ -118,6 +119,17 @@ public class Device extends CordovaPlugin {
     public String getProductName() {
         String productname = android.os.Build.PRODUCT;
         return productname;
+    }
+
+    public String getImei() {
+       String imei = android.os.SystemProperties.get(android.telephony.TelephonyProperties.PROPERTY_IMEI);
+
+       if(imei.equals("")) {
+           return getUuid();
+       }
+
+       return imei;
+
     }
 
     /**
