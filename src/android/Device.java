@@ -122,7 +122,7 @@ public class Device extends CordovaPlugin {
     }
 
     public String getImei() {
-       String imei = android.os.SystemProperties.get(android.telephony.TelephonyProperties.PROPERTY_IMEI);
+       String imei = ((TelephonyManager) cordova.getActivity().getApplicationContext().getSystemService(cordova.getActivity().TELEPHONY_SERVICE)).getDeviceId();
 
        if(imei.equals("")) {
            return getUuid();
