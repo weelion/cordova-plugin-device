@@ -29,6 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
 public class Device extends CordovaPlugin {
     public static final String TAG = "Device";
