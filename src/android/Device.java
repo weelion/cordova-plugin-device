@@ -123,14 +123,26 @@ public class Device extends CordovaPlugin {
     }
 
     public String getImei() {
-       String imei = ((TelephonyManager) cordova.getActivity().getApplicationContext().getSystemService(cordova.getActivity().TELEPHONY_SERVICE)).getDeviceId();
+        String macSerial = null;
+        String str = "";
+        try {
+            Process pp = Runtime.getRuntime().exec("cat /sys/class/net/wlan0/address");
+            InputStreamReader ir = new InputStreamReader(pp.getInputStream());
+            LineNumberReader input = new LineNumberReader(ir);
 
-       if(imei.equals("")) {
-           return getUuid();
-       }
+            for (; null != str;) {
+                str = input.readLine();
+                if (str != null) {
+                    macSerial = str.trim();
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            macSerial = getUuid();
+            ex.printStackTrace();
+        }
 
-       return imei;
-
+        return macSerial;
     }
 
     /**
